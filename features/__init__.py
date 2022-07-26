@@ -1,0 +1,1 @@
+from .my_parser_class import MyParserClass

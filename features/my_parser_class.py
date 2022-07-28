@@ -1,8 +1,31 @@
 #!/usr/bin/python3
-from . import parser
+
+import csv
 
 class MyParserClass():
-    def __init__(self, filename) -> None:
-        self.loaded_file = filename
-        print(parser)
     
+    __header = ''
+    __records = []
+    def __init__(self) -> None:
+        pass
+    
+    def load_file(self, filepath):
+        with open(filepath) as file:
+            loaded_file = csv.reader(file)
+            
+            self.__header = next(loaded_file)
+            for record in loaded_file:
+                self.__records.append(record)
+            
+    def print_header(self):
+        print(self.__header)
+
+    def print_records(self):
+        for record in self.__records:
+            print(record)
+    
+#erbud_data = MyParserClass
+#erbud_data.load_file(erbud_data, '../data/erb.csv')
+#erbud_data.print_header(erbud_data)
+#erbud_data.print_records(erbud_data)
+

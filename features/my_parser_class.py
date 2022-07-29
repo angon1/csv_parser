@@ -3,23 +3,22 @@
 import csv
 
 class MyParserClass():
-    
-    __header = ''
-    __records = []
+
     def __init__(self) -> None:
-        pass
+        self._header = ''
+        self._records = []
     
     def load_file(self, filepath):
         with open(filepath) as file:
             loaded_file = csv.reader(file)
             
-            self.__header = next(loaded_file)
+            self._header = next(loaded_file)
             for record in loaded_file:
-                self.__records.append(record)
+                self._records.append(record)
             
     def print_header(self):
-        print(self.__header)
+        print(self._header)
 
     def print_records(self):
-        for record in self.__records:
+        for record in self._records:
             print(record)

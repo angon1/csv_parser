@@ -1,19 +1,17 @@
 #!/usr/bin/python3
-
+import os
 from features import MyParserClass
-#from features import parser
-#from features.my_parser_class import MyParserClass
+
 
 if __name__ == "__main__":
-    print("main run directly")
-    
-    x = MyParserClass("some str")
-   #  parser.print_something()
-   #  parser.pretty_func("Dziala")
 
-   #  parser.pretty_func(123)
+    path_to_filebase = "".join([os.getcwd(),'/file_base'])
+    print(path_to_filebase)
+    erbud_data = MyParserClass()
+    erbud_data.load_file(path_to_filebase+'/erb.csv')
+    erbud_data.print_header()
+    erbud_data.print_records()
 
-   #  print(MyParserClass)
     
 
 

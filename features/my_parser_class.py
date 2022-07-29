@@ -23,9 +23,3 @@ class MyParserClass():
     def print_records(self):
         for record in self.__records:
             print(record)
-    
-#erbud_data = MyParserClass
-#erbud_data.load_file(erbud_data, '../data/erb.csv')
-#erbud_data.print_header(erbud_data)
-#erbud_data.print_records(erbud_data)
-

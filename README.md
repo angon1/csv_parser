@@ -1,8 +1,34 @@
 # csv_parser
 
+## Lista zagadnień
 
-## Work Plan
-- Dummy parser csv
+- Generatory
+- Comprehensions ()
+- Dekoratory
+- Pythonpath
+- Matplotlib
+- Pandas
+- numpy
+- SQL-Alchemy
+- k8 na caly projekt
+
+
+## Plan prac
+
+- Klasa do obrobki i przechowywania danych
+    - przechowywanie danych w panda dataframe
+    - usuwanie kolumn
+    - przygotowywanie kolumn pod wykresy
+    - ???
+- Klasa do zaczytywania dancyh z neta i wrzucania ich do jakiejś bazy danych/pliku (trzeba?)
+    - Wczytywanie z csv
+    - wczytywanie z stooq przez pandas_datareader
+    - zwracanie do obiektu glownego
+- Klasa do wizualizacji danych
+    - robienie wykresow w matplotlib, plottly lub innej libce
+- Klasa "main" do obslugi aplikacji + cli
+- Opcjonalnie: Gui?
+- 
 
 ### zadanie na 28.07.2022 lub 02.08.2022:
 * W folderze features stworzyć klasę która będzie odpowiadala za przechowywanie wczytanego pliku csv. Powinna dostarczać funkcje:

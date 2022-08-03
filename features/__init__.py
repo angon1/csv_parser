@@ -1,1 +1,2 @@
-from .my_parser_class import MyParserClass
+from features.my_parser_class import MyParserClass
+from features.my_parser_class import DownloadDataClass

@@ -4,6 +4,8 @@ import pandas as pd
 from pandas_datareader import stooq
 import matplotlib.pyplot as plt
 
+pd.set_option('display.float_format', str)
+
 class MyParserClass():
 
     def __init__(self) -> None:
@@ -48,9 +50,13 @@ class PlotDataClass():
 class DownloadDataClass():
     
     def __init__(self) -> None:
-        pass
-    @classmethod
-    def download(self):
-        erb_data = stooq.StooqDailyReader('wig20.pl')
-        var = erb_data.read()
-        print(var)
+        self._parsed_data = None
+    
+    def download(self, company_name='wig20.pl'):
+        data = stooq.StooqDailyReader('wig20.pl')
+        self._parsed_data = data.read()
+        # print(var)
+        
+    
+    def get_data(self):
+        return self._parsed_data

@@ -4,6 +4,8 @@ import pandas as pd
 from pandas_datareader import stooq
 import matplotlib.pyplot as plt
 
+pd.options.display.float_format = '${:,.2f}'.format
+
 class MyParserClass():
 
     def __init__(self) -> None:
@@ -15,7 +17,7 @@ class MyParserClass():
     
     @loaded_file.setter
     def loaded_file(self, value: pd.DataFrame):
-        self.loaded_file = value
+        self._loaded_file = value
     
     def load_file(self, filepath):
         self._loaded_file = pd.read_csv(filepath)
@@ -26,6 +28,18 @@ class MyParserClass():
 
     def show(self):
         print(self._loaded_file)
+        
+    def calculate_daily_change(self):
+        daily_change = [0]
+        prev_day_close = self.loaded_file['<CLOSE>'][0]
+        for it, daily_value in enumerate(self.loaded_file['<CLOSE>']):
+            if it == 0:
+                continue
+            daily_change.append(round(((daily_value - prev_day_close)/prev_day_close*100),2))
+            prev_day_close = daily_value
+            # self.loaded_file.insert(daily_change)
+        self.loaded_file["<DAILY CHANGE>"] = daily_change
+        
         
 class PlotDataClass():
     

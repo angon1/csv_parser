@@ -12,13 +12,14 @@ if __name__ == "__main__":
     os.environ["PYTHONPATH"] = "".join(os.getcwd())
     print(os.environ["PYTHONPATH"])
 
-    DownloadDataClass.download()
-    # path_to_filebase = "".join([os.getcwd(),'/data/erb.csv'])
+    # DownloadDataClass.download()
+    
+    path_to_filebase = "".join([os.getcwd(),'/data/erb.csv'])
 
-    # data = MyParserClass()
-    # data.load_file(path_to_filebase)
-
-    # data.show()
+    data = MyParserClass()
+    data.load_file(path_to_filebase)
+    data.calculate_daily_change()
+    data.show()
     # data.show_but_static()
 
     # PlotDataClass.plot_low_date(data.loaded_file)

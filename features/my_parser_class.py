@@ -53,7 +53,7 @@ class DownloadDataClass():
         self._parsed_data = None
     
     def download(self, company_name='wig20.pl'):
-        data = stooq.StooqDailyReader('wig20.pl')
+        data = stooq.StooqDailyReader(company_name)
         self._parsed_data = data.read()
         # print(var)
         

@@ -30,15 +30,17 @@ class MyParserClass():
         print(self._loaded_file)
         
     def calculate_daily_change(self):
-        daily_change = [0]
-        prev_day_close = self.loaded_file['<CLOSE>'][0]
-        for it, daily_value in enumerate(self.loaded_file['<CLOSE>']):
-            if it == 0:
-                continue
-            daily_change.append(round(((daily_value - prev_day_close)/prev_day_close*100),2))
-            prev_day_close = daily_value
-            # self.loaded_file.insert(daily_change)
-        self.loaded_file["<DAILY CHANGE>"] = daily_change
+        # daily_change = [0]
+        # prev_day_close = self.loaded_file['<CLOSE>'][0]
+        # for it, daily_value in enumerate(self.loaded_file['<CLOSE>']):
+        #     if it == 0:
+        #         continue
+        #     daily_change.append(round(((daily_value - prev_day_close)/prev_day_close*100),2))
+        #     prev_day_close = daily_value
+        #     # self.loaded_file.insert(daily_change)
+        # self.loaded_file["<DAILY CHANGE>"] = daily_change
+        self.loaded_file['<DAILY CHANGE>'] = self.loaded_file['<CLOSE>'].diff()/self.loaded_file['<CLOSE>'].shift(1)*100
+        print(self.loaded_file)
         
         
 class PlotDataClass():

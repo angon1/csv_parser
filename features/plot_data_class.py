@@ -10,7 +10,6 @@ class PlotDataClass():
     
     @classmethod
     def plot_on_close_date(cls, data: pd.DataFrame):
-        data.plot(x='Date', y='Close')
-        
+        data.plot(x='Date', y='Close') 
         plt.savefig("dupa")
         data.to_csv("on_close.csv")

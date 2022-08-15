@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-from ntpath import join
 import os
 import pandas as pd
 import pandas_datareader.data as pd_dr        

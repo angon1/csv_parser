@@ -70,42 +70,43 @@ stockData.load_data()
 
 stock = Stock()
 
-
 stock.name['name'] = stockData.name
 stock.name['ticker'] = stockData.ticker
 stock.date = stockData.stockQuotesHandler.data['Date'][0]
-stock.quotes['open'] = stockData.stockQuotesHandler.data['Open'][0]
-stock.quotes['high'] = stockData.stockQuotesHandler.data['High'][0]
-stock.quotes['low'] = stockData.stockQuotesHandler.data['Low'][0]
-stock.quotes['close'] = stockData.stockQuotesHandler.data['Close'][0]
+stock.quotes['open'] = stockData.stockQuotesHandler.data['Open'][0].astype(float)
+stock.quotes['high'] = stockData.stockQuotesHandler.data['High'][0].astype(float)
+stock.quotes['low'] = stockData.stockQuotesHandler.data['Low'][0].astype(float)
+stock.quotes['close'] = stockData.stockQuotesHandler.data['Close'][0].astype(float)
 #stock.quotes['daily change'] = stockData.stockQuotesHandler.data['Daily Change][0]
-stock.quotes['volume'] = stockData.stockQuotesHandler.data['Volume'][0]
+stock.quotes['volume'] = stockData.stockQuotesHandler.data['Volume'][0].astype(int)
 
 # for index, res in enumerate(stock.results):
 #     res = stockData.financialResultsHandler.data.iloc[index+1, 5]
-#     print(stockData.financialResultsHandler.data.iloc[index+1, 5])
+#     print(stockData.financialResultsHandler.data.iloc[index+1, 5]) 
+
+def parseFinancialData(input: str):
+    return int(input.replace('\xa0','').replace(',',''))
     
-stock.results['przychody netto'] = stockData.financialResultsHandler.data.iloc[1,5]
-stock.results['zysk operacyjny'] = stockData.financialResultsHandler.data.iloc[2,5]
-stock.results['zysk brutto'] = stockData.financialResultsHandler.data.iloc[3,5]
-stock.results['zysk netto'] = stockData.financialResultsHandler.data.iloc[4,5]
-stock.results['amortyzacja'] = stockData.financialResultsHandler.data.iloc[5,5]
-stock.results['ebitda'] = stockData.financialResultsHandler.data.iloc[6,5]
-stock.results['aktywa'] = stockData.financialResultsHandler.data.iloc[7,5]
-stock.results['kapital'] = stockData.financialResultsHandler.data.iloc[8,5]
-stock.results['liczba akcji'] = stockData.financialResultsHandler.data.iloc[9,5]
+stock.results['przychody netto'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[1,5])*1000
+stock.results['zysk operacyjny'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[2,5])*1000
+stock.results['zysk brutto'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[3,5])*1000
+stock.results['zysk netto'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[4,5])*1000
+stock.results['amortyzacja'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[5,5])*1000
+stock.results['ebitda'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[6,5])*1000
+stock.results['aktywa'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[7,5])*1000
+stock.results['kapital'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[8,5])*1000
+stock.results['liczba akcji'] = parseFinancialData(stockData.financialResultsHandler.data.iloc[9,5])
 stock.results['zysk na akcje'] = stockData.financialResultsHandler.data.iloc[10,5]
 # stock.results['wartosc akcji':] = stockData.financialResultsHandler.data.iloc[11,5]
 
-stock.indicators['P/E'] = 10*stock.results['liczba akcji']/stock.results['zysk netto']
+stock.indicators['P/E'] = stock.quotes['close']*stock.results['liczba akcji']/stock.results['zysk netto']
 stock.indicators['P/EBID'] = stock.quotes['close']*stock.results['liczba akcji']/stock.results['zysk operacyjny']
 stock.indicators['ROE'] = stock.results['zysk netto']/stock.results['kapital']*100
-stock.indicators['ROE'] = stock.results['zysk netto']/stock.results['aktywa']*100
-stock.indicators['ROE'] = stock.results['zysk operacyjny']/stock.results['przychody netto']*100
+stock.indicators['ROA'] = stock.results['zysk netto']/stock.results['aktywa']*100
+stock.indicators['ROS'] = stock.results['zysk operacyjny']/stock.results['przychody netto']*100
 
-# print(stock.name)
-# print(stock.date)
-# print(stock.quotes)
-print(stock.results['przychody netto'])
-print(stock.results['zysk na akcje'])
-
+print(stock.name)
+print(stock.date)
+print(stock.quotes)
+print(stock.results)
+print(stock.indicators)

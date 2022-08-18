@@ -36,8 +36,11 @@ class FinancialResultsHandlerClass(DataHandlerClass):
         self.path_to_file = ""+os.getcwd()+'/raw_data/financial_results/'+self.name+'.csv'
     
     def download(self):
-        self.data = pd.read_html('https://www.bankier.pl/gielda/notowania/akcje/'+self.name+'/wyniki-finansowe')[0]
-
+        try:
+            self.data = pd.read_html('https://www.bankier.pl/gielda/notowania/akcje/'+self.name+'/wyniki-finansowe')[0]
+        except:
+            print('error')
+            self.data = pd.DataFrame()
         
 class StockQuotesHandlerClass(DataHandlerClass):
     
@@ -46,4 +49,8 @@ class StockQuotesHandlerClass(DataHandlerClass):
         self.path_to_file = "".join([os.getcwd(),'/raw_data/stock_quotes/' + self.ticker + '.csv'])
         
     def download(self):
-        self.data = pd_dr.DataReader(self.ticker+'.pl', 'stooq')
+        try:
+            self.data = pd_dr.DataReader(self.ticker+'.pl', 'stooq')
+        except:
+            print('error')
+            self.data = pd.DataFrame()

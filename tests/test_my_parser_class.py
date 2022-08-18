@@ -1,28 +1,35 @@
-import time
-import pandas as pd
 import pytest
+from features.data_handler_class import FinancialResultsHandlerClass
+import features
 
-from features import MyParserClass
+# def test_true(my_tru_fixture):
+#     assert True == my_tru_fixture
 
-def test_instance_creation():
-    assert isinstance(MyParserClass(),MyParserClass)
+# @pytest.mark.parametrize('value', [True, False])
+# def test_true(value):
+#     assert True == value
     
-def test_calculate_daily_change(daily_change_test_data, expected_results):
-    test_parser = MyParserClass()
-    test_parser.loaded_file = daily_change_test_data
-    test_parser.calculate_daily_change()
-    assert test_parser.loaded_file["<DAILY CHANGE>"].tolist() == expected_results
+# @pytest.mark.parametrize('value, expected', [(True,True), (False,True)])
+# def test_123(value, expected):
+#     assert expected == value
     
-def test_one(return_one):
-    assert return_one == 1
+# @pytest.mark.xfail(reason = 'will refactor later')
+# def test_fail():
+#     assert False
+    
+# @pytest.mark.skip(reason= 'lazy test')
+# def test_lazy():
+#     assert False
+    
+# def test_FinancialDataHandler_1():
+#     dataHandler = FinancialResultsHandlerClass('str')
+#     assert dataHandler
 
-@pytest.mark.parametrize("input, expected", [("time_now","time_now"),(2,2)], indirect=["input", "expected"])    
-def test_some(input, expected):
-    assert input == expected
-    
-# def test_time_now(time_now):
-#     print (time_now)
-    
-# def test_time_in_5_sec(time_now):
-#     time.sleep(5)
-#     print(time_now)
+def test_FinancialDataHandler_download(mocker):
+    mocker.patch('features.data_handler_class.pd.read_html', return_value = '123')
+    dataHandler = FinancialResultsHandlerClass('str')
+    dataHandler.download()
+    dataHandler.download()
+    features.data_handler_class.pd.read_html.assert_called_once()
+    print(dataHandler.data)
+    assert dataHandler

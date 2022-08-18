@@ -1,1 +1,1 @@
-from .stock_data_parser_class import StockDataParserClass
+from .raw_data_parser_class import RawDataParserClass

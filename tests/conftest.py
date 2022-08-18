@@ -22,3 +22,12 @@ def daily_change_test_data2(data = [1,2]):
 @pytest.fixture()
 def expected_results():
     return [0,100]
+
+@pytest.fixture
+def my_tru_fols_fixture():
+    yield True
+    return False
+
+@pytest.fixture
+def my_tru_fixture():
+    return True

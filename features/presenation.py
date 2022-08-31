@@ -1,5 +1,5 @@
 from typing import Union
-from features.stock_data_parser_class import MyParserClass
+from features.raw_data_parser_class import MyParserClass
 import sqlalchemy
 import sqlalchemy_utils
 import pandas

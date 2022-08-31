@@ -29,6 +29,12 @@ class DataHandlerClass():
             self.download()
             self.store_data_to_csv()
             
+    def file_exist(self):
+        if os.path.exists(self.path_to_file):
+            return True
+        else:
+            return False
+            
 class FinancialResultsHandlerClass(DataHandlerClass):
     
     def __init__(self, name: str) -> None:

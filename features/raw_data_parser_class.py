@@ -8,8 +8,11 @@ class RawDataParserClass():
     def __init__(self) -> None:
         pass
     
-    def parseFinancialData(self, input: str):
+    def parse_financial_data(self, input: str):
         return int(input.replace('\xa0','').replace(',',''))
+    
+    def calculate_daily_change(self, price_today, price_yesterday):
+        return (price_today-price_yesterday)/price_yesterday*100
         
     def parse(self, input:RawDataClass, output:Stock):
        
@@ -21,17 +24,17 @@ class RawDataParserClass():
         output.quotes['low'] = input.stockQuotesHandler.data['Low'][0].astype(float)
         output.quotes['close'] = input.stockQuotesHandler.data['Close'][0].astype(float)
         output.quotes['volume'] = input.stockQuotesHandler.data['Volume'][0].astype(int)
-        #output.quotes['daily change'] = input.stockQuotesHandler.data['Daily Change][0]
+        output.quotes['daily change'] = self.calculate_daily_change(input.stockQuotesHandler.data['Close'][0], input.stockQuotesHandler.data['Close'][1])
     
-        output.results['przychody netto'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[1,5])*1000
-        output.results['zysk operacyjny'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[2,5])*1000
-        output.results['zysk brutto'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[3,5])*1000
-        output.results['zysk netto'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[4,5])*1000
-        output.results['amortyzacja'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[5,5])*1000
-        output.results['ebitda'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[6,5])*1000
-        output.results['aktywa'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[7,5])*1000
-        output.results['kapital'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[8,5])*1000
-        output.results['liczba akcji'] = self.parseFinancialData(input.financialResultsHandler.data.iloc[9,5])
+        output.results['przychody netto'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[1,5])*1000
+        output.results['zysk operacyjny'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[2,5])*1000
+        output.results['zysk brutto'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[3,5])*1000
+        output.results['zysk netto'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[4,5])*1000
+        output.results['amortyzacja'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[5,5])*1000
+        output.results['ebitda'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[6,5])*1000
+        output.results['aktywa'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[7,5])*1000
+        output.results['kapital'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[8,5])*1000
+        output.results['liczba akcji'] = self.parse_financial_data(input.financialResultsHandler.data.iloc[9,5])
         output.results['zysk na akcje'] = input.financialResultsHandler.data.iloc[10,5]
         # output.results['wartosc akcji':] = input.financialResultsHandler.data.iloc[11,5]
 
@@ -48,6 +51,3 @@ class RawDataParserClass():
             output.indicators['ROE'] = 0
             output.indicators['ROA'] = 0
             output.indicators['ROS'] = 0
-
-    def calculate_daily_change(data):
-        data['Daily Change'] = data['Close'].diff()/data['Close'].shift(1)*100 

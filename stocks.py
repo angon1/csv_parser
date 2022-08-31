@@ -1,4 +1,4 @@
-from features.stocks_data_class import StocksDataClass
+#!/usr/bin/python3
 
 wig20list = [
     ('ALLEGRO', 'ale'),
@@ -57,4 +57,12 @@ class Stock():
         'ROA':0,     # return on assets – wskaźnik rentowności aktywów - zysk netto/aktywa*100%
         'ROS':0      # return on sales - marza zysku operacyjnego - zysk operacyjny/przychody netto*100%
     }
+    
+    def print(self):
+        print(self.name)
+        print(self.date)
+        print(self.quotes)
+        print(self.results)
+        print(self.indicators)
+        print()
     
